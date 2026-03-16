@@ -1,0 +1,122 @@
+/* Layout Design Modes */
+
+.dashboard-container {
+  transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+/* Default Mode - Full width */
+.dashboard-container.mode-default {
+  background-color: var(--bg-primary);
+  padding: 0;
+}
+
+.dashboard-container.mode-default .main-content {
+  padding: 2rem;
+}
+
+.dashboard-container.mode-default .page-content {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Boxed Mode - Centered with max-width */
+.dashboard-container.mode-boxed {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.dashboard-container.mode-boxed .main-content {
+  padding: 0;
+}
+
+.dashboard-container.mode-boxed .page-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: var(--card-bg);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--card-border);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-container.mode-boxed .page-content {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container.mode-boxed {
+    padding: 1rem;
+  }
+
+  .dashboard-container.mode-boxed .page-content {
+    padding: 1rem;
+    border-radius: var(--radius-lg);
+  }
+}
+
+/* Boxed Card Design - Individual cards have more prominence */
+.dashboard-container.mode-boxed .widget-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-container.mode-boxed .widget-card:hover {
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Default mode - subtle cards */
+.dashboard-container.mode-default .widget-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.dashboard-container.mode-default .widget-card:hover {
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Section Headers */
+.section-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.dashboard-container.mode-boxed .section-header {
+  border-bottom-color: var(--accent-color);
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.section-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  margin-top: 0.25rem;
+}
+
+/* Grid adjustments for design modes */
+.dashboard-container.mode-boxed .grid-container {
+  gap: 1.5rem;
+}
+
+.dashboard-container.mode-default .grid-container {
+  gap: 1rem;
+}

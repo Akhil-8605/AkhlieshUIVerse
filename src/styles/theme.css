@@ -1,0 +1,87 @@
+/* Theme CSS Variables */
+
+:root,
+html[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f7fa;
+  --bg-tertiary: #eef2f7;
+  
+  --card-bg: #ffffff;
+  --card-bg-hover: #f9fafb;
+  
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  
+  --border-color: #e0e0e0;
+  --border-color-light: #f0f0f0;
+  
+  --accent-color: #3b82f6;
+  --accent-color-dark: #1d4ed8;
+  --accent-color-light: #60a5fa;
+  
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  --info-color: #3b82f6;
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  
+  --card-bg: #1e293b;
+  --card-bg-hover: #334155;
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  
+  --border-color: #334155;
+  --border-color-light: #475569;
+  
+  --accent-color: #60a5fa;
+  --accent-color-dark: #1d4ed8;
+  --accent-color-light: #93c5fd;
+  
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  --info-color: #60a5fa;
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom Accent Color Support */
+html[data-accent="green"] {
+  --accent-color: #10b981;
+  --accent-color-dark: #059669;
+  --accent-color-light: #6ee7b7;
+}
+
+html[data-accent="purple"] {
+  --accent-color: #8b5cf6;
+  --accent-color-dark: #6d28d9;
+  --accent-color-light: #a78bfa;
+}
+
+html[data-accent="orange"] {
+  --accent-color: #f97316;
+  --accent-color-dark: #d97706;
+  --accent-color-light: #fb923c;
+}
+
+html[data-accent="red"] {
+  --accent-color: #ef4444;
+  --accent-color-dark: #dc2626;
+  --accent-color-light: #f87171;
+}
