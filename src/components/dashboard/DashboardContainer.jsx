@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../layout/Navbar';
 import Sidebar from '../layout/Sidebar';
 import PageRenderer from './PageRenderer';
+import ProfileModal from '../modals/ProfileModal';
 import { useTheme } from '../../hooks/useTheme';
 import { useResponsive } from '../../hooks/useResponsive';
 import '../../styles/layout.css';
@@ -10,8 +11,14 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
   const [currentPageId, setCurrentPageId] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const { theme, toggleTheme, accentColor, changeAccentColor } = useTheme();
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme(config.accentColor || 'blue');
   const { isMobile } = useResponsive();
+  
+  // Get design mode and navbar visibility from config
+  const designMode = config.design || 'default'; // 'default' | 'boxed'
+  const showNavbar = config.navbar !== false; // Default to true
+  const showSidebar = showNavbar; // Sidebar only shows when navbar is visible
 
   // Set initial page
   useEffect(() => {
@@ -44,10 +51,23 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
 
+  const handleProfileAction = (actionId) => {
+    // Handler for profile modal actions - log action triggered, can be extended
+    console.log('Profile action triggered:', actionId);
+  };
+
   return (
-    <div className="app-container">
-      {/* Sidebar */}
-      {!isMobile && (
+    <div className={`app-container design-mode-${designMode}`}>
+      {/* Profile Modal */}
+      <ProfileModal
+        isOpen={profileModalOpen}
+        onClose={() => setProfileModalOpen(false)}
+        profile={config.profile}
+        onActionClick={handleProfileAction}
+      />
+      
+      {/* Sidebar - Only shows when navbar is visible */}
+      {!isMobile && showSidebar && (
         <Sidebar
           items={config.pages.map(p => ({ id: p.id, label: p.title, icon: p.icon }))}
           activeId={currentPageId}
@@ -57,8 +77,8 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
         />
       )}
 
-      {/* Mobile Sidebar Overlay */}
-      {isMobile && sidebarOpen && (
+      {/* Mobile Sidebar Overlay - Only shows when navbar is visible */}
+      {isMobile && sidebarOpen && showSidebar && (
         <>
           <div
             style={{
@@ -80,23 +100,30 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
 
       {/* Main Content */}
       <div className="app-content">
-        {/* Navbar */}
-        <Navbar
-          brand={config.name || 'Dashboard'}
-          actions={[
-            {
-              icon: theme === 'light' ? '🌙' : '☀️',
-              onClick: toggleTheme,
-              label: 'Toggle Theme'
-            },
-            {
-              icon: '⚙️',
-              onClick: () => console.log('Settings clicked'),
-              label: 'Settings'
-            }
-          ]}
-          onMenuToggle={handleMenuToggle}
-        />
+        {/* Navbar - Conditionally rendered based on config */}
+        {showNavbar && (
+          <Navbar
+            brand={config.name || 'Dashboard'}
+            actions={[
+              {
+                icon: '👤',
+                onClick: () => setProfileModalOpen(true),
+                label: 'Profile'
+              },
+              {
+                icon: theme === 'light' ? '🌙' : '☀️',
+                onClick: toggleTheme,
+                label: 'Toggle Theme'
+              },
+              {
+                icon: '⚙️',
+                onClick: () => console.log('Settings clicked'),
+                label: 'Settings'
+              }
+            ]}
+            onMenuToggle={handleMenuToggle}
+          />
+        )}
 
         {/* Page Content */}
         <div className="page-wrapper">

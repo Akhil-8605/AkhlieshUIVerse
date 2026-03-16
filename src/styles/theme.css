@@ -5,26 +5,26 @@ html[data-theme="light"] {
   --bg-primary: #ffffff;
   --bg-secondary: #f5f7fa;
   --bg-tertiary: #eef2f7;
-  
+
   --card-bg: #ffffff;
   --card-bg-hover: #f9fafb;
-  
+
   --text-primary: #1a1a1a;
   --text-secondary: #666666;
   --text-tertiary: #999999;
-  
+
   --border-color: #e0e0e0;
   --border-color-light: #f0f0f0;
-  
+
   --accent-color: #3b82f6;
   --accent-color-dark: #1d4ed8;
   --accent-color-light: #60a5fa;
-  
+
   --success-color: #10b981;
   --warning-color: #f59e0b;
   --error-color: #ef4444;
   --info-color: #3b82f6;
-  
+
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -35,26 +35,26 @@ html[data-theme="dark"] {
   --bg-primary: #0f172a;
   --bg-secondary: #1e293b;
   --bg-tertiary: #334155;
-  
+
   --card-bg: #1e293b;
   --card-bg-hover: #334155;
-  
+
   --text-primary: #f1f5f9;
   --text-secondary: #cbd5e1;
   --text-tertiary: #94a3b8;
-  
+
   --border-color: #334155;
   --border-color-light: #475569;
-  
+
   --accent-color: #60a5fa;
   --accent-color-dark: #1d4ed8;
   --accent-color-light: #93c5fd;
-  
+
   --success-color: #10b981;
   --warning-color: #f59e0b;
   --error-color: #ef4444;
   --info-color: #60a5fa;
-  
+
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
@@ -68,10 +68,18 @@ html[data-accent="green"] {
   --accent-color-light: #6ee7b7;
 }
 
+html[data-accent="green"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(110, 231, 183, 0.1));
+}
+
 html[data-accent="purple"] {
   --accent-color: #8b5cf6;
   --accent-color-dark: #6d28d9;
   --accent-color-light: #a78bfa;
+}
+
+html[data-accent="purple"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(167, 139, 250, 0.1));
 }
 
 html[data-accent="orange"] {
@@ -80,8 +88,139 @@ html[data-accent="orange"] {
   --accent-color-light: #fb923c;
 }
 
+html[data-accent="orange"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(251, 146, 60, 0.1));
+}
+
 html[data-accent="red"] {
   --accent-color: #ef4444;
   --accent-color-dark: #dc2626;
   --accent-color-light: #f87171;
+}
+
+html[data-accent="red"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(248, 113, 113, 0.1));
+}
+
+/* Additional Accent Color Palettes */
+
+/* Blue */
+html[data-accent="blue"] {
+  --accent-color: #3b82f6;
+  --accent-color-dark: #1d4ed8;
+  --accent-color-light: #93c5fd;
+}
+
+html[data-accent="blue"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 197, 253, 0.1));
+}
+
+/* Indigo */
+html[data-accent="indigo"] {
+  --accent-color: #6366f1;
+  --accent-color-dark: #4338ca;
+  --accent-color-light: #a5b4fc;
+}
+
+html[data-accent="indigo"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(165, 180, 252, 0.1));
+}
+
+/* Cyan */
+html[data-accent="cyan"] {
+  --accent-color: #06b6d4;
+  --accent-color-dark: #0e7490;
+  --accent-color-light: #67e8f9;
+}
+
+html[data-accent="cyan"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(103, 232, 249, 0.1));
+}
+
+/* Teal */
+html[data-accent="teal"] {
+  --accent-color: #14b8a6;
+  --accent-color-dark: #0f766e;
+  --accent-color-light: #5eead4;
+}
+
+html[data-accent="teal"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(94, 234, 212, 0.1));
+}
+
+/* Pink */
+html[data-accent="pink"] {
+  --accent-color: #ec4899;
+  --accent-color-dark: #be185d;
+  --accent-color-light: #f9a8d4;
+}
+
+html[data-accent="pink"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(249, 168, 212, 0.1));
+}
+
+/* Rose */
+html[data-accent="rose"] {
+  --accent-color: #f43f5e;
+  --accent-color-dark: #be123c;
+  --accent-color-light: #fda4af;
+}
+
+html[data-accent="rose"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.1), rgba(253, 164, 175, 0.1));
+}
+
+/* Amber */
+html[data-accent="amber"] {
+  --accent-color: #f59e0b;
+  --accent-color-dark: #b45309;
+  --accent-color-light: #fcd34d;
+}
+
+html[data-accent="amber"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(252, 211, 77, 0.1));
+}
+
+/* Lime */
+html[data-accent="lime"] {
+  --accent-color: #84cc16;
+  --accent-color-dark: #4d7c0f;
+  --accent-color-light: #bef264;
+}
+
+html[data-accent="lime"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(132, 204, 22, 0.1), rgba(190, 242, 100, 0.1));
+}
+
+/* Emerald */
+html[data-accent="emerald"] {
+  --accent-color: #10b981;
+  --accent-color-dark: #047857;
+  --accent-color-light: #6ee7b7;
+}
+
+html[data-accent="emerald"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(110, 231, 183, 0.1));
+}
+
+/* Sky */
+html[data-accent="sky"] {
+  --accent-color: #0ea5e9;
+  --accent-color-dark: #0369a1;
+  --accent-color-light: #7dd3fc;
+}
+
+html[data-accent="sky"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(125, 211, 252, 0.1));
+}
+
+/* Slate */
+html[data-accent="slate"] {
+  --accent-color: #64748b;
+  --accent-color-dark: #334155;
+  --accent-color-light: #94a3b8;
+}
+
+html[data-accent="slate"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.1), rgba(148, 163, 184, 0.1));
 }

@@ -1,41 +1,41 @@
 /* Layout Design Modes */
 
-.dashboard-container {
+.app-container {
   transition: background-color 0.3s ease, padding 0.3s ease;
 }
 
-/* Default Mode - Full width */
-.dashboard-container.mode-default {
+/* Default Mode - Full width layout */
+.app-container.design-mode-default {
   background-color: var(--bg-primary);
-  padding: 0;
 }
 
-.dashboard-container.mode-default .main-content {
+.app-container.design-mode-default .page-wrapper {
+  background-color: var(--bg-primary);
+}
+
+.app-container.design-mode-default .page-wrapper > * {
   padding: 2rem;
-}
-
-.dashboard-container.mode-default .page-content {
   max-width: 100%;
-  margin: 0 auto;
 }
 
-/* Boxed Mode - Centered with max-width */
-.dashboard-container.mode-boxed {
+/* Boxed Mode - Centered with max-width and padding */
+.app-container.design-mode-boxed {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+.app-container.design-mode-boxed .page-wrapper {
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   padding: 2rem;
-  min-height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
-.dashboard-container.mode-boxed .main-content {
-  padding: 0;
-}
-
-.dashboard-container.mode-boxed .page-content {
+.app-container.design-mode-boxed .page-wrapper > * {
+  width: 100%;
   max-width: 1400px;
-  margin: 0 auto;
   background-color: var(--card-bg);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
   padding: 2rem;
   box-shadow: var(--shadow-lg);
   transition: all 0.3s ease;

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../styles/layout.css';
 
-const Sidebar = ({ 
+const Sidebar = ({
   items = [],
   activeId,
   onItemClick,
@@ -23,8 +23,9 @@ const Sidebar = ({
         >
           {collapsed ? '→' : '←'}
         </button>
+        <span className={`sidebar-title ${collapsed ? 'collapsed' : ''}`}>Dashboard</span>
       </div>
-      
+
       <div className="sidebar-menu">
         {items.map((item) => (
           <div

@@ -14,6 +14,7 @@ const PageRenderer = ({ page, rendererMap = {} }) => {
         <Header 
           title={page.title}
           description={page.description}
+          icon={page.icon}
         />
       )}
       

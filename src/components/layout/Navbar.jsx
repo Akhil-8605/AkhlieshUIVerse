@@ -2,7 +2,7 @@ import React from 'react';
 import '../../styles/layout.css';
 
 const Navbar = ({ 
-  brand = 'Akhil Dashboard', 
+  brand = "Dashboard Created By Using Akhilesh UI Verse", 
   menu = [], 
   actions = [],
   onMenuToggle

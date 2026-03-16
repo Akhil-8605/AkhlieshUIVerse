@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import '../../styles/modals.css';
 
 // ProfileModal component renders user profile info from JSON config
-const ProfileModal = ({ isOpen, onClose, profile = {} }) => {
+// Note: Actions only trigger close/callbacks, no direct method execution
+const ProfileModal = ({ isOpen, onClose, profile = {}, onActionClick = null }) => {
   const [isClosing, setIsClosing] = useState(false);
 
   const handleClose = () => {
@@ -99,8 +100,13 @@ const ProfileModal = ({ isOpen, onClose, profile = {} }) => {
                   key={index}
                   className={`modal-action-btn ${action.variant || 'secondary'}`}
                   onClick={() => {
-                    if (action.onClick) action.onClick();
-                    if (action.closeOnClick) handleClose();
+                    // Only handle closeOnClick - action handlers are defined at container level
+                    if (onActionClick) {
+                      onActionClick(action.id || action.label);
+                    }
+                    if (action.closeOnClick) {
+                      handleClose();
+                    }
                   }}
                 >
                   {action.label}

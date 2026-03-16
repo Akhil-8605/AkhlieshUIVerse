@@ -7,22 +7,45 @@ const StatsCard = ({
   value, 
   change, 
   changeType = 'neutral',
-  icon = '📊'
+  icon = '📊',
+  title = ''
 }) => {
+  const formattedValue = formatNumber(value);
+  
   return (
     <div className="stats-card">
-      <div className="stats-card-content">
-        <div className="stats-card-label">{label}</div>
-        <div className="stats-card-value">{formatNumber(value)}</div>
+      {/* Top Section: Icon and Title */}
+      <div className="stats-card-header">
+        <div className="stats-card-icon-wrapper">
+          <span className="stats-card-icon">{icon}</span>
+        </div>
+        <div className="stats-card-title-section">
+          {title && <div className="stats-card-title">{title}</div>}
+          <div className="stats-card-label">{label}</div>
+        </div>
+      </div>
+
+      {/* Middle Section: Main Value */}
+      <div className="stats-card-body">
+        <div className="stats-card-value">{formattedValue}</div>
+        
+        {/* Change Indicator */}
         {change !== undefined && (
-          <div className={`stats-card-change ${changeType}`}>
-            {changeType === 'positive' && '↑ '}
-            {changeType === 'negative' && '↓ '}
-            {Math.abs(change)}%
+          <div className={`stats-card-change-badge ${changeType}`}>
+            <span className="stats-card-change-icon">
+              {changeType === 'positive' && '↑'}
+              {changeType === 'negative' && '↓'}
+              {changeType === 'neutral' && '→'}
+            </span>
+            <span className="stats-card-change-value">
+              {Math.abs(change)}%
+            </span>
           </div>
         )}
       </div>
-      <div className="stats-card-icon">{icon}</div>
+
+      {/* Bottom Accent Line */}
+      <div className="stats-card-accent" />
     </div>
   );
 };

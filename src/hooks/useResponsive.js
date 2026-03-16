@@ -28,6 +28,6 @@ export const useResponsive = () => {
     isTablet,
     isDesktop,
     width,
-    breakpoint: isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop'
+    breakpoint: isMobile ? 'mobile' : 'desktop'
   };
 };
