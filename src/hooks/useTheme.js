@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
 
-export const useTheme = () => {
+export const useTheme = (configAccentColor = 'blue') => {
   const [theme, setTheme] = useState('light');
-  const [accentColor, setAccentColor] = useState('blue');
+  const [accentColor, setAccentColor] = useState(configAccentColor);
 
-  // Initialize theme from localStorage
+  // Initialize theme from localStorage or config
   useEffect(() => {
     const savedTheme = localStorage.getItem('app-theme') || 'light';
-    const savedAccent = localStorage.getItem('app-accent') || 'blue';
     
     setTheme(savedTheme);
-    setAccentColor(savedAccent);
-    applyTheme(savedTheme, savedAccent);
-  }, []);
+    setAccentColor(configAccentColor);
+    applyTheme(savedTheme, configAccentColor);
+  }, [configAccentColor]);
 
   const applyTheme = (newTheme, newAccent) => {
     const html = document.documentElement;
@@ -20,8 +19,8 @@ export const useTheme = () => {
     // Apply theme
     html.setAttribute('data-theme', newTheme);
     
-    // Apply accent color
-    if (newAccent !== 'blue') {
+    // Apply accent color from config
+    if (newAccent && newAccent !== 'blue') {
       html.setAttribute('data-accent', newAccent);
     } else {
       html.removeAttribute('data-accent');
@@ -35,17 +34,10 @@ export const useTheme = () => {
     localStorage.setItem('app-theme', newTheme);
   };
 
-  const changeAccentColor = (newAccent) => {
-    setAccentColor(newAccent);
-    applyTheme(theme, newAccent);
-    localStorage.setItem('app-accent', newAccent);
-  };
-
   return {
     theme,
     toggleTheme,
     accentColor,
-    changeAccentColor,
     isDark: theme === 'dark'
   };
 };

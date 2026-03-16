@@ -68,10 +68,18 @@ html[data-accent="green"] {
   --accent-color-light: #6ee7b7;
 }
 
+html[data-accent="green"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(110, 231, 183, 0.1));
+}
+
 html[data-accent="purple"] {
   --accent-color: #8b5cf6;
   --accent-color-dark: #6d28d9;
   --accent-color-light: #a78bfa;
+}
+
+html[data-accent="purple"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(167, 139, 250, 0.1));
 }
 
 html[data-accent="orange"] {
@@ -80,8 +88,16 @@ html[data-accent="orange"] {
   --accent-color-light: #fb923c;
 }
 
+html[data-accent="orange"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(251, 146, 60, 0.1));
+}
+
 html[data-accent="red"] {
   --accent-color: #ef4444;
   --accent-color-dark: #dc2626;
   --accent-color-light: #f87171;
+}
+
+html[data-accent="red"] .stats-card-icon-wrapper {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(248, 113, 113, 0.1));
 }

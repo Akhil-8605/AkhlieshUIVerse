@@ -2,6 +2,48 @@
 
 This guide explains how to control the entire dashboard UI using JSON configuration. The `dashboardConfig.js` file defines the structure, styling, and content of your dashboard.
 
+## What's New (Professional Design Edition)
+
+### 🎨 Color System
+- **No ColorPicker UI**: Colors are controlled via JSON config `accentColor` field
+- Supported colors: `blue`, `green`, `purple`, `orange`, `red`
+- All components automatically adapt styling based on the accent color
+- Color themes work perfectly in both light and dark modes
+
+### 🚀 Navbar Control
+- **`navbar: false`** hides the navbar AND sidebar (perfect for single-page layouts)
+- **`navbar: true`** (default) shows both navbar and sidebar for standard navigation
+- Sidebar only displays when navbar is visible
+
+### 📋 Profile Modal - JSON-Driven Actions
+- Profile actions are completely JSON-configured, no direct function execution
+- Actions trigger callbacks via `onActionClick` handler in container
+- Use `id` field to identify which action was clicked
+- Actions close modal based on `closeOnClick` flag
+
+```javascript
+actions: [
+  { id: 'edit-profile', label: 'Edit Profile', variant: 'primary', closeOnClick: false },
+  { id: 'logout', label: 'Logout', variant: 'secondary', closeOnClick: true }
+]
+```
+
+### ✨ StatsCard - Professional Redesign
+- Enhanced visual hierarchy with icon wrapper badge
+- Better typography and spacing
+- Smooth hover animations with elevation
+- Support for optional `title` field (uppercase label above main label)
+- Professional change indicator badges with colors
+- Accent line at bottom for visual polish
+
+### 🎯 Design Improvements
+- **Modals**: Smooth animations, gradient backgrounds, professional shadows
+- **Buttons**: Gradient backgrounds with smooth transitions and elevation effects
+- **Navbar**: Improved spacing, professional brand styling, smooth action button interactions
+- **Sidebar**: Modern design with smooth transitions, active state indicator
+- **Cards**: Professional shadows, hover effects, border transitions
+- **All Themes**: Colors properly applied across light/dark modes with all accent colors
+
 ## Table of Contents
 
 1. [Global Configuration](#global-configuration)
@@ -37,10 +79,37 @@ The root level of `dashboardConfig` controls global settings:
 |-----|------|--------|-------------|
 | `name` | string | Any string | Name displayed in navbar |
 | `layoutMode` | string | 'sidebar', 'top-nav' | Navigation layout style |
-| `theme` | string | 'light', 'dark' | Color theme |
-| `accentColor` | string | Color name | Primary accent color |
+| `theme` | string | 'light', 'dark' | Color theme (applies to all components) |
+| `accentColor` | string | 'blue', 'green', 'purple', 'orange', 'red' | Primary brand color (controls all component styling) |
 | `design` | string | 'default', 'boxed' | Layout design mode |
-| `navbar` | boolean | true, false | Show/hide navbar |
+| `navbar` | boolean | true, false | Show/hide navbar and sidebar |
+
+### Color Theming
+
+The `accentColor` property controls the entire dashboard's color scheme:
+
+```javascript
+// Blue theme (default)
+accentColor: 'blue'
+
+// Green theme
+accentColor: 'green'
+
+// Purple theme
+accentColor: 'purple'
+
+// Orange theme
+accentColor: 'orange'
+
+// Red theme
+accentColor: 'red'
+```
+
+Each color works with both light and dark themes:
+- **Light Theme**: Brighter, more vibrant accent colors
+- **Dark Theme**: Deeper accent colors with better contrast
+
+All components automatically update their styling based on the selected accent color.
 
 ---
 
@@ -80,15 +149,26 @@ Centered layout with maximum width and padding:
 
 ### Navbar Control
 
-Show or hide the navbar:
+The `navbar` property controls both navbar and sidebar visibility:
 
 ```javascript
 {
-  navbar: true    // Show navbar (default)
+  navbar: true    // Show navbar AND sidebar (default) - standard dashboard layout
   // or
-  navbar: false   // Hide navbar for single-page layout
+  navbar: false   // Hide navbar AND sidebar - single-page layout with full-width content
 }
 ```
+
+**Important:** When `navbar` is set to `false`:
+- The navbar/header is hidden
+- The sidebar navigation is hidden
+- The page content takes full width
+- Ideal for simple, focused landing pages or single-purpose dashboards
+
+**When `navbar` is `true` (default):**
+- Top navigation bar is displayed with brand, menu, and action buttons
+- Sidebar navigation is visible for page switching
+- Standard dashboard layout with header and navigation
 
 ### Layout Mode
 
@@ -128,13 +208,19 @@ Configure the user profile modal that appears when clicking the profile button:
       { label: 'Tasks', value: '45' }
     ],
     
-    // Array of action buttons
+    // Array of action buttons (JSON-driven, no direct function execution)
     actions: [
       {
+        id: 'edit-profile',           // Unique action identifier
         label: 'Edit Profile',
-        variant: 'primary',           // 'primary' | 'secondary'
-        onClick: null,                // Function to call (optional)
+        variant: 'primary',           // 'primary' | 'secondary' | 'danger'
         closeOnClick: false           // Close modal after click
+      },
+      {
+        id: 'logout',
+        label: 'Logout',
+        variant: 'secondary',
+        closeOnClick: true            // Close modal on logout
       }
     ]
   }
@@ -151,6 +237,26 @@ Configure the user profile modal that appears when clicking the profile button:
 | `fields` | array | Array of {label, value} objects |
 | `stats` | array | Array of {label, value} statistics |
 | `actions` | array | Array of action buttons |
+
+### Profile Action Handling
+
+Actions are JSON-configured and don't execute functions directly. Instead, they trigger the `onActionClick` callback in the `DashboardContainer`:
+
+```javascript
+// In DashboardContainer.jsx, the handler is:
+const handleProfileAction = (actionId) => {
+  console.log('Profile action triggered:', actionId);
+  // Extend this to handle different actions:
+  // - 'edit-profile': Navigate to settings
+  // - 'logout': Clear auth and redirect
+  // etc.
+};
+```
+
+**Action Button Variants:**
+- `primary`: Blue gradient button (main action)
+- `secondary`: Gray button with border (alternative action)
+- `danger`: Red gradient button (destructive action)
 
 ---
 
@@ -200,30 +306,38 @@ Configure the user profile modal that appears when clicking the profile button:
 
 ### 1. Stats Card (`stats-card`)
 
-A colorful card showing a single metric with change indicator:
+A professional metric card with icon badge, title, value, and change indicator. Features smooth hover animations and accent color adaptation.
 
 ```javascript
 {
   id: 'metric-users',
   type: 'stats-card',
-  title: 'Total Users',
-  label: 'Users',
-  value: 12453,
-  change: 12.5,
-  changeType: 'positive',    // 'positive' | 'negative' | 'neutral'
-  icon: '👥'
+  title: 'Active Users',              // Optional: uppercase label above main label
+  label: 'Total Users',               // Main label
+  value: 12453,                       // Numeric value (automatically formatted)
+  change: 12.5,                       // Percentage change
+  changeType: 'positive',             // 'positive' | 'negative' | 'neutral'
+  icon: '👥'                          // Emoji or icon
 }
 ```
+
+**Design Features:**
+- Icon displayed in colored badge wrapper that adapts to accent color
+- Professional hierarchy: title (uppercase) → label → value
+- Change indicator with color-coded badge (green/red/gray)
+- Smooth hover elevation and color transition
+- Accent line at bottom for visual polish
+- Fully responsive on mobile devices
 
 **Options:**
 - `id`: Unique identifier
 - `type`: Must be 'stats-card'
-- `title`: Card title
-- `label`: Value label
-- `value`: Numeric value
-- `change`: Percentage change
-- `changeType`: 'positive' (green), 'negative' (red), 'neutral'
-- `icon`: Emoji or icon character
+- `title`: Optional uppercase label (displayed above main label)
+- `label`: Main value label (required)
+- `value`: Numeric value (automatically formatted with commas)
+- `change`: Percentage change amount
+- `changeType`: 'positive' (↑ green), 'negative' (↓ red), 'neutral' (→ gray)
+- `icon`: Emoji, Unicode character, or text icon
 
 ### 2. Card Design 1 (`cardDesign1`)
 

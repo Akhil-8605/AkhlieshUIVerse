@@ -49,15 +49,16 @@
 /* Base Modal Styles */
 .profile-modal {
   background: var(--card-bg);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--card-border);
-  box-shadow: var(--shadow-xl);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   width: 90vw;
   max-width: 500px;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  animation: modalSlideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (max-width: 768px) {
@@ -120,15 +121,23 @@
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(96, 165, 250, 0.05));
+  border-radius: 12px;
+  padding: 2rem 1.5rem 1.5rem;
 }
 
 .profile-avatar {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 3px solid var(--accent-color);
+  border: 4px solid var(--accent-color);
   object-fit: cover;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-avatar:hover {
+  transform: scale(1.05);
 }
 
 /* Profile Fields */
@@ -188,24 +197,33 @@
 
 .profile-stat-item {
   text-align: center;
-  padding: 1rem;
+  padding: 1.25rem 1rem;
   background-color: var(--bg-secondary);
-  border-radius: var(--radius-md);
+  border-radius: 10px;
   border: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-stat-item:hover {
+  border-color: var(--accent-color);
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
 }
 
 .profile-stat-value {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 800;
   color: var(--accent-color);
+  display: block;
+  margin-bottom: 0.25rem;
 }
 
 .profile-stat-label {
   font-size: 0.75rem;
   color: var(--text-tertiary);
-  margin-top: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 /* Modal Footer */
@@ -219,13 +237,14 @@
 }
 
 .modal-action-btn {
-  padding: 0.625rem 1rem;
-  border-radius: var(--radius-md);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
   font-size: 0.875rem;
   font-weight: 600;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .modal-action-btn.secondary {
@@ -237,24 +256,32 @@
 .modal-action-btn.secondary:hover {
   background-color: var(--border-color);
   border-color: var(--accent-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .modal-action-btn.primary {
-  background-color: var(--accent-color);
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-color-light));
   color: white;
+  border: none;
 }
 
 .modal-action-btn.primary:hover {
-  background-color: var(--accent-color-dark);
+  background: linear-gradient(135deg, var(--accent-color-dark), var(--accent-color));
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
 }
 
 .modal-action-btn.danger {
-  background-color: var(--error-color);
+  background: linear-gradient(135deg, var(--error-color), #f87171);
   color: white;
+  border: none;
 }
 
 .modal-action-btn.danger:hover {
-  background-color: #dc2626;
+  background: linear-gradient(135deg, #dc2626, var(--error-color));
+  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.3);
+  transform: translateY(-2px);
 }
 
 /* Animations */
@@ -264,6 +291,17 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

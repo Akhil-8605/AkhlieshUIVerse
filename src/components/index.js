@@ -33,5 +33,4 @@ export { default as DataTable } from './lists/DataTable';
 
 // Control Components
 export { default as ThemeToggle } from './controls/ThemeToggle';
-export { default as ColorPicker } from './controls/ColorPicker';
 export { default as SearchBar } from './controls/SearchBar';

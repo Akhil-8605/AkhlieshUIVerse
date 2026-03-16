@@ -12,12 +12,13 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
-  const { theme, toggleTheme, accentColor, changeAccentColor } = useTheme();
+  const { theme, toggleTheme } = useTheme(config.accentColor || 'blue');
   const { isMobile } = useResponsive();
   
   // Get design mode and navbar visibility from config
   const designMode = config.design || 'default'; // 'default' | 'boxed'
   const showNavbar = config.navbar !== false; // Default to true
+  const showSidebar = showNavbar; // Sidebar only shows when navbar is visible
 
   // Set initial page
   useEffect(() => {
@@ -50,6 +51,11 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
 
+  const handleProfileAction = (actionId) => {
+    // Handler for profile modal actions - log action triggered, can be extended
+    console.log('Profile action triggered:', actionId);
+  };
+
   return (
     <div className={`app-container design-mode-${designMode}`}>
       {/* Profile Modal */}
@@ -57,10 +63,11 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
         isOpen={profileModalOpen}
         onClose={() => setProfileModalOpen(false)}
         profile={config.profile}
+        onActionClick={handleProfileAction}
       />
       
-      {/* Sidebar */}
-      {!isMobile && (
+      {/* Sidebar - Only shows when navbar is visible */}
+      {!isMobile && showSidebar && (
         <Sidebar
           items={config.pages.map(p => ({ id: p.id, label: p.title, icon: p.icon }))}
           activeId={currentPageId}
@@ -70,8 +77,8 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
         />
       )}
 
-      {/* Mobile Sidebar Overlay */}
-      {isMobile && sidebarOpen && (
+      {/* Mobile Sidebar Overlay - Only shows when navbar is visible */}
+      {isMobile && sidebarOpen && showSidebar && (
         <>
           <div
             style={{

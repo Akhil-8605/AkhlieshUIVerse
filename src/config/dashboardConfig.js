@@ -33,8 +33,8 @@ export const dashboardConfig = {
       { label: 'Teams', value: '8' }
     ],
     actions: [
-      { label: 'Edit Profile', variant: 'primary', onClick: null },
-      { label: 'Logout', variant: 'secondary', closeOnClick: true }
+      { id: 'edit-profile', label: 'Edit Profile', variant: 'primary', closeOnClick: false },
+      { id: 'logout', label: 'Logout', variant: 'secondary', closeOnClick: true }
     ]
   },
   
