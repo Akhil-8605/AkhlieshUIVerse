@@ -4,10 +4,39 @@
  */
 
 export const dashboardConfig = {
+  // Dashboard name and global settings
   name: 'Akhil Dashboard',
-  layoutMode: 'sidebar',
-  theme: 'light',
-  accentColor: 'blue',
+  layoutMode: 'sidebar', // 'sidebar' | 'top-nav' | 'minimal'
+  theme: 'light', // 'light' | 'dark'
+  accentColor: 'blue', // Primary brand color
+  
+  // Design mode: controls layout style - 'default' for full-width, 'boxed' for centered with margins
+  design: 'default',
+  
+  // Navbar visibility: set to false to remove navbar and render single-page layout
+  navbar: true,
+  
+  // Profile modal configuration - displayed in navbar or via config
+  profile: {
+    title: 'My Profile',
+    avatar: 'https://via.placeholder.com/80',
+    fields: [
+      { label: 'Name', value: 'Akhil' },
+      { label: 'Email', value: 'akhil@example.com' },
+      { label: 'Role', value: 'Admin' },
+      { label: 'Status', value: 'Active' }
+    ],
+    description: 'Welcome to your dashboard. Manage your account and preferences here.',
+    stats: [
+      { label: 'Projects', value: '12' },
+      { label: 'Tasks', value: '45' },
+      { label: 'Teams', value: '8' }
+    ],
+    actions: [
+      { label: 'Edit Profile', variant: 'primary', onClick: null },
+      { label: 'Logout', variant: 'secondary', closeOnClick: true }
+    ]
+  },
   
   pages: [
     // Overview Page
@@ -63,6 +92,54 @@ export const dashboardConfig = {
               change: 5.8,
               changeType: 'positive',
               icon: '🎯'
+            }
+          ]
+        },
+        // Card Design Variants Section
+        {
+          id: 'card-designs-section',
+          title: 'Card Design Variants',
+          description: 'Different card layout options for your dashboard',
+          gridCols: 3,
+          widgets: [
+            {
+              id: 'card-design1',
+              type: 'cardDesign1',
+              title: 'Minimalist Card',
+              value: '2,450',
+              label: 'New Signups',
+              icon: '✨',
+              description: 'Clean and simple card design',
+              trend: '+15%'
+            },
+            {
+              id: 'card-design2',
+              type: 'cardDesign2',
+              title: 'Featured Card',
+              value: '42.5K',
+              label: 'Total Revenue',
+              icon: '💎',
+              description: 'Highlighted card with accent color',
+              chart: {
+                type: 'mini-bar',
+                data: [12, 19, 3, 5, 2, 3]
+              },
+              trend: '+8.2%'
+            },
+            {
+              id: 'card-design3',
+              type: 'cardDesign3',
+              title: 'Advanced Card',
+              value: '94.2%',
+              label: 'Performance Score',
+              icon: '⚡',
+              description: 'Card with additional metrics',
+              stats: [
+                { name: 'Uptime', value: '99.9%' },
+                { name: 'Latency', value: '45ms' },
+                { name: 'Errors', value: '0.2%' }
+              ],
+              trend: '-0.1%'
             }
           ]
         },

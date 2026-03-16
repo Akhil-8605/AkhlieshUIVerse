@@ -1,4 +1,7 @@
 import StatsCard from '../components/dashboard/StatsCard';
+import CardDesign1 from '../components/cards/CardDesign1';
+import CardDesign2 from '../components/cards/CardDesign2';
+import CardDesign3 from '../components/cards/CardDesign3';
 import BarChartWidget from '../components/charts/BarChartWidget';
 import LineChartWidget from '../components/charts/LineChartWidget';
 import PieChartWidget from '../components/charts/PieChartWidget';
@@ -16,6 +19,11 @@ import DataTable from '../components/lists/DataTable';
 export const rendererMap = {
   // Dashboard Widgets
   'stats-card': StatsCard,
+  
+  // Card Design Variants
+  'cardDesign1': CardDesign1,
+  'cardDesign2': CardDesign2,
+  'cardDesign3': CardDesign3,
   
   // Chart Widgets
   'bar-chart': BarChartWidget,

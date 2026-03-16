@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../layout/Navbar';
 import Sidebar from '../layout/Sidebar';
 import PageRenderer from './PageRenderer';
+import ProfileModal from '../modals/ProfileModal';
 import { useTheme } from '../../hooks/useTheme';
 import { useResponsive } from '../../hooks/useResponsive';
 import '../../styles/layout.css';
@@ -10,8 +11,13 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
   const [currentPageId, setCurrentPageId] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
   const { theme, toggleTheme, accentColor, changeAccentColor } = useTheme();
   const { isMobile } = useResponsive();
+  
+  // Get design mode and navbar visibility from config
+  const designMode = config.design || 'default'; // 'default' | 'boxed'
+  const showNavbar = config.navbar !== false; // Default to true
 
   // Set initial page
   useEffect(() => {
@@ -45,7 +51,14 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
   };
 
   return (
-    <div className="app-container">
+    <div className={`app-container design-mode-${designMode}`}>
+      {/* Profile Modal */}
+      <ProfileModal
+        isOpen={profileModalOpen}
+        onClose={() => setProfileModalOpen(false)}
+        profile={config.profile}
+      />
+      
       {/* Sidebar */}
       {!isMobile && (
         <Sidebar
@@ -80,23 +93,30 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
 
       {/* Main Content */}
       <div className="app-content">
-        {/* Navbar */}
-        <Navbar
-          brand={config.name || 'Dashboard'}
-          actions={[
-            {
-              icon: theme === 'light' ? '🌙' : '☀️',
-              onClick: toggleTheme,
-              label: 'Toggle Theme'
-            },
-            {
-              icon: '⚙️',
-              onClick: () => console.log('Settings clicked'),
-              label: 'Settings'
-            }
-          ]}
-          onMenuToggle={handleMenuToggle}
-        />
+        {/* Navbar - Conditionally rendered based on config */}
+        {showNavbar && (
+          <Navbar
+            brand={config.name || 'Dashboard'}
+            actions={[
+              {
+                icon: '👤',
+                onClick: () => setProfileModalOpen(true),
+                label: 'Profile'
+              },
+              {
+                icon: theme === 'light' ? '🌙' : '☀️',
+                onClick: toggleTheme,
+                label: 'Toggle Theme'
+              },
+              {
+                icon: '⚙️',
+                onClick: () => console.log('Settings clicked'),
+                label: 'Settings'
+              }
+            ]}
+            onMenuToggle={handleMenuToggle}
+          />
+        )}
 
         {/* Page Content */}
         <div className="page-wrapper">
