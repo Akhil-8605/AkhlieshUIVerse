@@ -20,10 +20,12 @@ const PageRenderer = ({ page, rendererMap = {} }) => {
       
       <div className="page-body">
         {page.sections && page.sections.length > 0 ? (
-          page.sections.map((section) => (
+          page.sections.map((section, sectionIndex) => (
             <SectionRenderer 
-              key={section.id} 
+              key={`${page.id}-${section.id || 'section'}-${sectionIndex}`}
+              pageId={page.id}
               section={section}
+              sectionIndex={sectionIndex}
               rendererMap={rendererMap}
             />
           ))

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../layout/Navbar';
 import Sidebar from '../layout/Sidebar';
 import PageRenderer from './PageRenderer';
@@ -12,7 +12,11 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme(config.accentColor || 'blue');
+  const pageWrapperRef = useRef(null);
+  const { theme, toggleTheme } = useTheme(
+    config.accentColor || 'blue',
+    config.theme || 'light'
+  );
   const { isMobile } = useResponsive();
   
   // Get design mode and navbar visibility from config
@@ -33,6 +37,12 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
       setSidebarOpen(false);
     }
   }, [isMobile]);
+
+  useEffect(() => {
+    if (pageWrapperRef.current && typeof pageWrapperRef.current.scrollTo === 'function') {
+      pageWrapperRef.current.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  }, [currentPageId]);
 
   const currentPage = config.pages?.find(p => p.id === currentPageId);
 
@@ -81,12 +91,12 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
       {isMobile && sidebarOpen && showSidebar && (
         <>
           <div
+            onClick={() => setSidebarOpen(false)}
             style={{
               position: 'fixed',
               inset: 0,
               backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              zIndex: 99,
-              onClick: () => setSidebarOpen(false)
+              zIndex: 99
             }}
           />
           <Sidebar
@@ -126,9 +136,13 @@ const DashboardContainer = ({ config, rendererMap = {} }) => {
         )}
 
         {/* Page Content */}
-        <div className="page-wrapper">
+        <div
+          ref={pageWrapperRef}
+          className="page-wrapper"
+        >
           {currentPage ? (
             <PageRenderer 
+              key={currentPage.id}
               page={currentPage}
               rendererMap={rendererMap}
             />

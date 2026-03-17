@@ -3,7 +3,7 @@ import WidgetRenderer from './WidgetRenderer';
 import '../../styles/dashboard.css';
 import '../../styles/layout.css';
 
-const SectionRenderer = ({ section, rendererMap = {} }) => {
+const SectionRenderer = ({ section, pageId = 'page', sectionIndex = 0, rendererMap = {} }) => {
   if (!section || !section.widgets) {
     return null;
   }
@@ -16,9 +16,9 @@ const SectionRenderer = ({ section, rendererMap = {} }) => {
       {section.description && <p className="section-description">{section.description}</p>}
       
       <div className={`grid ${gridColsClass}`}>
-        {section.widgets.map((widget) => (
+        {section.widgets.map((widget, widgetIndex) => (
           <WidgetRenderer 
-            key={widget.id} 
+            key={`${pageId}-${section.id || 'section'}-${sectionIndex}-${widget.id || 'widget'}-${widgetIndex}`}
             widget={widget}
             rendererMap={rendererMap}
           />

@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 
-export const useTheme = (configAccentColor = 'blue') => {
-  const [theme, setTheme] = useState('light');
+export const useTheme = (configAccentColor = 'blue', initialTheme = 'light') => {
+  const [theme, setTheme] = useState(initialTheme);
   const [accentColor, setAccentColor] = useState(configAccentColor);
 
   // Initialize theme from localStorage or config
   useEffect(() => {
-    const savedTheme = localStorage.getItem('app-theme') || 'light';
+    const savedTheme = localStorage.getItem('app-theme') || initialTheme;
     
     setTheme(savedTheme);
     setAccentColor(configAccentColor);
     applyTheme(savedTheme, configAccentColor);
-  }, [configAccentColor]);
+  }, [configAccentColor, initialTheme]);
 
   const applyTheme = (newTheme, newAccent) => {
     const html = document.documentElement;

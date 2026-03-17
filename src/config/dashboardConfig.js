@@ -5,7 +5,7 @@
 
 export const dashboardConfig = {
   // Dashboard name and global settings
-  name: 'Akhil Dashboard',
+  name: 'Dashboard Created Using akhilesh-ui-verse', // Dashboard title displayed in navbar and page titles
   layoutMode: 'sidebar', // 'sidebar' | 'top-nav' | 'minimal'
   theme: 'light', // 'light' | 'dark'
   accentColor: 'sky', // Primary brand color
@@ -238,7 +238,7 @@ export const dashboardConfig = {
           ]
         },
         {
-          id: 'distribution-section',
+          id: 'traffic-trends-section',
           title: ' ',
           gridCols: 1,
           widgets: [
